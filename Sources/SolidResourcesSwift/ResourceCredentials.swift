@@ -14,7 +14,7 @@ public protocol RefreshDelegate: AnyObject {
     func accessTokenRefreshed(_ credentials: ResourceCredentials, completion:(Bool)->())
 }
 
-public protocol ResourceConfiguration {
+public protocol ResourceConfigurable {
     // The public PEM key converted to a JWK.
     var jwk: JWK_RSA { get }
     
@@ -33,8 +33,31 @@ public protocol ResourceConfiguration {
     var refreshDelegate:RefreshDelegate? { get }
 }
 
+// An example object conforming to ResourceConfigurable
+public struct ResourceConfiguration: ResourceConfigurable {
+    public let jwk: JWK_RSA
+    public let privateKey: String
+    public let clientId: String
+    public let clientSecret: String
+    public let storageIRI: URL
+    public let tokenEndpoint: URL
+    public let authenticationMethod: TokenEndpointAuthenticationMethod
+    public let refreshDelegate: RefreshDelegate?
+    
+    public init(jwk: JWK_RSA, privateKey: String, clientId: String, clientSecret: String, storageIRI: URL, tokenEndpoint: URL, authenticationMethod: TokenEndpointAuthenticationMethod, refreshDelegate: RefreshDelegate?) {
+        self.jwk = jwk
+        self.privateKey = privateKey
+        self.clientId = clientId
+        self.clientSecret = clientSecret
+        self.storageIRI = storageIRI
+        self.tokenEndpoint = tokenEndpoint
+        self.authenticationMethod = authenticationMethod
+        self.refreshDelegate = refreshDelegate
+    }
+}
+
 public protocol ResourceCredentials: AnyObject {
-    var config: ResourceConfiguration! { get }
+    var config: ResourceConfigurable! { get }
     
     // Leave this nil. Just a convenience.
     var tokenRequest:TokenRequest<JWK_RSA>? { get set }

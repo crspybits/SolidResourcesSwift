@@ -1,5 +1,8 @@
 SolidResourcesSwift
 
+Version 0.0.2 (9/28/21)
+    Add example struct conforming to protocol.
+    
 Version 0.0.1 (9/28/21)
     Initial version.
     

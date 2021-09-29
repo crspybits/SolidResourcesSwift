@@ -45,19 +45,8 @@ struct SolidCredsParams: Codable {
     let refreshToken: String?
 }
 
-struct Configuration: ResourceConfiguration {
-    let jwk: JWK_RSA
-    let privateKey: String
-    let clientId: String
-    let clientSecret: String
-    let storageIRI: URL
-    let tokenEndpoint: URL
-    let authenticationMethod: TokenEndpointAuthenticationMethod
-    let refreshDelegate: RefreshDelegate?
-}
-
 class ExampleCredentials: ResourceCredentials {
-    var config: ResourceConfiguration!
+    var config: ResourceConfigurable!
 
     var tokenRequest:TokenRequest<JWK_RSA>?
         
@@ -154,7 +143,7 @@ class Common: XCTestCase {
             throw SetupError.noStorageIRI
         }
 
-        let configuration = Configuration(jwk: jwk, privateKey: configFile.privateKey, clientId: serverParameters.refresh.clientId, clientSecret: serverParameters.refresh.clientSecret, storageIRI: storageIRI, tokenEndpoint: serverParameters.refresh.tokenEndpoint, authenticationMethod: serverParameters.refresh.authenticationMethod, refreshDelegate: nil)
+        let configuration = ResourceConfiguration(jwk: jwk, privateKey: configFile.privateKey, clientId: serverParameters.refresh.clientId, clientSecret: serverParameters.refresh.clientSecret, storageIRI: storageIRI, tokenEndpoint: serverParameters.refresh.tokenEndpoint, authenticationMethod: serverParameters.refresh.authenticationMethod, refreshDelegate: nil)
         
         credentials.config = configuration
     }
