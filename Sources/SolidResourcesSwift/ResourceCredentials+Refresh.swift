@@ -14,7 +14,7 @@ extension ResourceCredentials {
     // Uses the refresh token to generate a new access token.
     // If error is nil when the completion handler is called, then the accessToken of this object has been refreshed.
     func refresh(queue: DispatchQueue = .global(), completion:@escaping (Error?)->()) {
-        guard let config = config else {
+        guard let config = resourceConfigurable else {
             completion(RequestError.noConfiguration)
             return
         }
@@ -45,7 +45,7 @@ extension ResourceCredentials {
                 self.accessToken = accessToken
                 self.refreshToken = response.refresh_token
                 
-                guard let refreshDelegate = self.config.refreshDelegate else {
+                guard let refreshDelegate = self.resourceConfigurable.refreshDelegate else {
                     Log.warning("No delegate.")
                     completion(nil)
                     return

@@ -57,7 +57,7 @@ public struct ResourceConfiguration: ResourceConfigurable {
 }
 
 public protocol ResourceCredentials: AnyObject {
-    var config: ResourceConfigurable! { get }
+    var resourceConfigurable: ResourceConfigurable! { get }
     
     // Leave this nil. Just a convenience.
     var tokenRequest:TokenRequest<JWK_RSA>? { get set }

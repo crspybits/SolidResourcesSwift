@@ -46,7 +46,7 @@ struct SolidCredsParams: Codable {
 }
 
 class ExampleCredentials: ResourceCredentials {
-    var config: ResourceConfigurable!
+    var resourceConfigurable: ResourceConfigurable!
 
     var tokenRequest:TokenRequest<JWK_RSA>?
         
@@ -145,7 +145,7 @@ class Common: XCTestCase {
 
         let configuration = ResourceConfiguration(jwk: jwk, privateKey: configFile.privateKey, clientId: serverParameters.refresh.clientId, clientSecret: serverParameters.refresh.clientSecret, storageIRI: storageIRI, tokenEndpoint: serverParameters.refresh.tokenEndpoint, authenticationMethod: serverParameters.refresh.authenticationMethod, refreshDelegate: nil)
         
-        credentials.config = configuration
+        credentials.resourceConfigurable = configuration
     }
     
     func refreshCreds() throws {

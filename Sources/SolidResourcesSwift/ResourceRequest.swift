@@ -131,7 +131,7 @@ public extension ResourceCredentials {
         `url` is the actual endpoint used in the HTTP request.
     */
     private func createAuthenticationHeaders(url: URL, httpMethod: HttpMethod) throws -> [Header: String] {
-        guard let config = config else {
+        guard let config = resourceConfigurable else {
             throw RequestError.noConfiguration
         }
         
@@ -172,7 +172,7 @@ public extension ResourceCredentials {
     //  - accessTokenAutoRefresh: Whether or not to automatically refresh the access token if we get a http status 401. A refresh is only tried once. Callers typically should just use the default.
     func request(path: String? = nil, httpMethod: HttpMethod, body: Data? = nil, headers: [Header: String], accessTokenAutoRefresh: Bool = true, completion: @escaping (RequestResult) -> ()) {
     
-        guard let config = config else {
+        guard let config = resourceConfigurable else {
             completion(.failure(Failure(RequestError.noConfiguration)))
             return
         }
