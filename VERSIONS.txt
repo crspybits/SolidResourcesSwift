@@ -1,0 +1,8 @@
+SolidResourcesSwift
+
+Version 0.0.1 (9/28/21)
+    Initial version.
+    
+
+
+
