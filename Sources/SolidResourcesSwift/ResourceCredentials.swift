@@ -42,7 +42,7 @@ public struct ResourceConfiguration: ResourceConfigurable {
     public let storageIRI: URL
     public let tokenEndpoint: URL
     public let authenticationMethod: TokenEndpointAuthenticationMethod
-    public let refreshDelegate: RefreshDelegate?
+    public weak var refreshDelegate: RefreshDelegate?
     
     public init(jwk: JWK_RSA, privateKey: String, clientId: String, clientSecret: String, storageIRI: URL, tokenEndpoint: URL, authenticationMethod: TokenEndpointAuthenticationMethod, refreshDelegate: RefreshDelegate?) {
         self.jwk = jwk

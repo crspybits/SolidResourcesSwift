@@ -1,5 +1,8 @@
 SolidResourcesSwift
 
+Version 0.0.4 (9/28/21)
+    Make refresh method public. Make delegate weak.
+    
 Version 0.0.3 (9/28/21)
     Improve protocol member name.
     
